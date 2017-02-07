@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="template/template.xhtml">
+    <ui:define name="content">
+        <h:form>
+            <h:panelGrid columns="2">
+
+                <h:outputText value="Find User Account:"/>
+                <h:inputText id="user-id-input" value="#{accountInfo.username}"/>
+                <h:outputText value=""/>
+                <h:commandButton id="submit-account-form" value="Search"
+                                 action="#{accountService.findUserAccount(accountInfo)}"/>
+
+                <!--<h:commandButton id="submit-account-new-page" value="Submit New Page"-->
+                                 <!--action="account-info-results.xhtml?faces-redirect=true">-->
+                        <!--<f:param name="username" value="accountInfo.username"/>-->
+                <!--</h:commandButton>-->
+
+            </h:panelGrid>
+        </h:form>
+
+
+        <h:panelGroup rendered="#{not empty accountInfo.accountInformation}">
+
+                <h:dataTable value="#{accountInfo.accountInformation}" var="item">
+                    <h:column>
+                        <f:facet name="header">Username</f:facet>
+                        #{item.get("username")}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Address</f:facet>
+                        #{item.get("address")}
+                    </h:column>
+
+                </h:dataTable>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>
