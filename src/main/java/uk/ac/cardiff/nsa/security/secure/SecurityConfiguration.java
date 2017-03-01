@@ -2,6 +2,7 @@ package uk.ac.cardiff.nsa.security.secure;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,7 +16,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration   {
 
     @Inject
     private DataSource ds;
@@ -30,18 +31,40 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 
     }
 
+    @Configuration
+    @Order(1)
+    public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+        protected void configure(HttpSecurity http) throws Exception {
+            http.authorizeRequests().antMatchers("/api/**")
+                    .authenticated().and().httpBasic();
+        }
+    }
 
+    @Configuration
+    public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http
+                    .authorizeRequests()
+                    .anyRequest().authenticated()
+                    .and()
+                    .formLogin();
+        }
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-//        http
-//                .authorizeRequests()
-//                .anyRequest().authenticated()
-//                .and()
-//                .httpBasic().and().csrf().disable();
+        http
+                .authorizeRequests().antMatchers("/auth/*")
+               .authenticated()
+                .and()
+                .formLogin();
 
-        http.authorizeRequests().anyRequest().permitAll();
+                http.authorizeRequests().antMatchers("/api/**").authenticated().and().httpBasic();
+
+    //   http.authorizeRequests().anyRequest().permitAll().and().csrf().disable();
     }
 
 //    @Autowired

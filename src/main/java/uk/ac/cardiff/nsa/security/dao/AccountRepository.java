@@ -3,6 +3,7 @@ package uk.ac.cardiff.nsa.security.dao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import uk.ac.cardiff.nsa.security.service.AccountService;
 
@@ -28,6 +29,7 @@ public class AccountRepository {
 
     @Inject
     private DataSource dataSource;
+
 
 
     @PostConstruct
@@ -57,7 +59,7 @@ public class AccountRepository {
                 final Map<String,Object> result = new HashMap<String,Object>();
                 for (int i=1; i <= cols;i++){
                     log.debug("Result {}, {}",results.getMetaData().getColumnName(i),results.getObject(i));
-                    result.put(results.getMetaData().getColumnName(i),results.getObject(i));
+                    result.put(results.getMetaData().getColumnName(i),results.getObject(i).toString());
                 }
                 userResultMap.add(result);
             }
@@ -70,7 +72,8 @@ public class AccountRepository {
 
         } catch (SQLException e) {
             log.error("Could not find user, SQL error", e);
+            throw new RuntimeException(e.getMessage());
         }
-        return Collections.emptyList();
+
     }
 }

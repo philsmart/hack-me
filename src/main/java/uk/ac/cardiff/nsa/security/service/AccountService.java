@@ -1,12 +1,18 @@
 package uk.ac.cardiff.nsa.security.service;
 
+import org.apache.catalina.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.context.embedded.tomcat.TomcatContextCustomizer;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import uk.ac.cardiff.nsa.security.StartHackMe;
 import uk.ac.cardiff.nsa.security.dao.AccountRepository;
+import uk.ac.cardiff.nsa.security.model.Account;
 import uk.ac.cardiff.nsa.security.model.AccountInfo;
 
 import javax.annotation.PostConstruct;
@@ -26,7 +32,7 @@ import java.util.Objects;
  * @Service over @Component - more correct semantically, functionally equivelant currently.
  */
 @Service
-public class AccountService {
+public class AccountService{
 
     private static final Logger log = LoggerFactory.getLogger(AccountService.class);
 
@@ -54,4 +60,6 @@ public class AccountService {
 
 
     }
+
+
 }

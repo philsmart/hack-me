@@ -2,7 +2,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                template="template/template.xhtml">
+                template="../template/template.xhtml">
     <ui:define name="content">
         <h:form>
             <h:panelGrid columns="2">
@@ -13,12 +13,26 @@
                 <h:commandButton id="submit-account-form" value="Search"
                                  action="#{accountService.findUserAccount(accountInfo)}"/>
 
+                <!--<h:outputText value="#{accountInfo.script}" escape="false"/>-->
+
+                <!--<h:outputText value="#{accountInfo.listCookiesScript}" escape="false"/>-->
+
+                <!--<h:outputText value="#{accountInfo.javaScriptKeyLogger}" escape="false"/>-->
+
+
+                <h:outputText value="#{param['name']}" escape="false"/> <!--this is reflected if URL is given out in email etc with script in 'name' -->
+
                 <!--<h:commandButton id="submit-account-new-page" value="Submit New Page"-->
                                  <!--action="account-info-results.xhtml?faces-redirect=true">-->
                         <!--<f:param name="username" value="accountInfo.username"/>-->
                 <!--</h:commandButton>-->
 
+
+
             </h:panelGrid>
+            <input type="hidden"
+                   name="${_csrf.parameterName}"
+                   value="${_csrf.token}"/>
         </h:form>
 
 
@@ -31,7 +45,8 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Address</f:facet>
-                        #{item.get("address")}
+                        <h:outputText value="#{item.get('address')}" escape="false"/>
+
                     </h:column>
 
                 </h:dataTable>

