@@ -11,7 +11,7 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'war'
+apply plugin: 'jar'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
@@ -42,6 +42,9 @@ dependencies {
     compile group: 'jstl', name: 'jstl', version: '1.2'
 	// https://mvnrepository.com/artifact/javax.inject/javax.inject
 	compile group: 'javax.inject', name: 'javax.inject', version: '1'
+	// https://mvnrepository.com/artifact/org.json/json
+	compile group: 'org.json', name: 'json', version: '20160810'
+	compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.0.12.RELEASE'
 
 
 

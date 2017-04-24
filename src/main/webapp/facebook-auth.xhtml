@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="template/template.xhtml">
+    <ui:define name="content">
+
+       <p>Here, we are going to use Facebook OAuth2 Authorisation Grant to access information about a user. Would
+       allow us to query the Facebook Graph API about that user (depending on priveleges) to a) provision accounts etc.</p>
+
+
+        <a href="https://www.facebook.com/dialog/oauth?client_id=1982088195406872&amp;response_type=code&amp;redirect_uri=http://localhost:8080/fb/login&amp;scope=email">login</a>
+
+
+    </ui:define>
+
+</ui:composition>

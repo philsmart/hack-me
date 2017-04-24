@@ -18,6 +18,7 @@ import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.core.Authentication;
 
 @SpringBootApplication
 @ComponentScan(basePackages = { "uk.ac.cardiff" })
@@ -45,6 +46,7 @@ public class StartHackMe  implements EmbeddedServletContainerCustomizer {
         final ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(servlet, new String[]{"*.xhtml"});
         servletRegistrationBean.setName("FacesServlet");
         servletRegistrationBean.setLoadOnStartup(1);
+      Authentication a;
         return servletRegistrationBean;
     }
 
