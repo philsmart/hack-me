@@ -1,6 +1,6 @@
 package uk.ac.cardiff.nsa.security.controller;
 
-import com.sun.deploy.net.HttpResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,7 @@ import uk.ac.cardiff.nsa.security.dao.AccountRepository;
 import uk.ac.cardiff.nsa.security.jsf.ConfigureJSFContextParameters;
 
 import javax.inject.Inject;
-import java.sql.SQLSyntaxErrorException;
+
 import java.util.List;
 import java.util.Map;
 

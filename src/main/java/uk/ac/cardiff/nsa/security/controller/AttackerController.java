@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import uk.ac.cardiff.nsa.security.dao.AccountRepository;
@@ -23,6 +24,7 @@ public class AttackerController {
 
     @Inject
     private AccountRepository repository;
+
 
     @RequestMapping(value = "/sendme", method= RequestMethod.GET )
     public  ResponseEntity<Void> findUser(@RequestParam("cookie") String cookie, HttpServletRequest request, HttpServletResponse response){

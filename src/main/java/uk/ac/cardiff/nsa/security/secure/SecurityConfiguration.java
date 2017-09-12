@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
@@ -35,11 +37,14 @@ public class SecurityConfiguration   {
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         log.debug("Setting up auth manager");
+        UserDetails df;
 
-        auth.jdbcAuthentication().dataSource(getDs()).usersByUsernameQuery(
+        auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder()).dataSource(getDs()).usersByUsernameQuery(
                 "select username,password, enabled from users where username=?")
                 .authoritiesByUsernameQuery(
-                        "select username, role from user_roles where username=?");;
+                        "select username, role from user_roles where username=?");
+
+
 
     }
 
